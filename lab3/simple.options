@@ -1,0 +1,6 @@
+Element.key max_size:13;
+Element.stringValue max_size:1024;
+Document.name max_size:13;
+Query.documentName max_size:13;
+Document.element max_count:20;
+QueryResult.document max_count:5;

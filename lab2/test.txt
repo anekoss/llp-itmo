@@ -1,0 +1,66 @@
+db.tree.find();
+
+db.tree.find().limit(100);
+
+db.tree.find( {username: { $ne: "joe"}}).limit(399);
+
+db.restaurant.deleteOne(
+      { name : "CentralPerkCafe" }
+   );
+
+db.movies.deleteMany( {
+     year: 2010,
+     $or: [{
+       year: 2010,
+       $or: [ { awardsns: { $gte: 5 } ,  genres: "Drama" } ]
+     ,  genres: "Drama"
+}]}).limit(50);
+
+db.tree.find( { $or: [ { ticket: 547 ,  winner: true } ] } );
+
+
+db.tree.insertOne({
+    doc_name:root,
+    name: "ABC",
+    address: "Mumbai",
+    phone: 1234567890,
+    married: true,
+    raid: 2.5
+});
+
+db.tree.insertMany([{
+    doc_name:child,
+    name: "ababsbdjfjfjfjfjfjfjfj",
+    address: "Mumbai",
+    phone: 1234567890,
+    has_dog: false,
+    raid: 2.5
+},{
+    doc_name:root,
+    name: "ABCJFFJFJFJJFJFJFJFJ",
+    address: "Mumbai",
+    phone: 1234567890,
+    married: false,
+    raid: 7.43
+  },
+  {
+    doc_name:root_2,
+    name: "ABC",
+    address: "Mumbai",
+    phone: 1234567890,
+    married: true,
+    raid: 2.5
+    } ]);
+
+
+
+
+
+db.root.updateOne({username: { $ne: "joe"}},{$set:{name: "ABC",
+                                                      address: "Mumbai",
+                                                      phone: 1234567890,
+                                                      married: true,
+                                                      raid: 2.5
+                                                  }});
+
+

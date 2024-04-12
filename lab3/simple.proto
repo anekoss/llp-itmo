@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+enum QueryType{
+  SELECT = 0;
+  INSERT = 1;
+  UPDATE = 2;
+  DELETE = 3;
+}
+
+
+enum ElementType {
+  INT = 0;
+  DOUBLE = 1;
+  STRING = 2;
+  BOOLEAN = 3;
+}
+
+message Element{
+  ElementType type = 1;
+  string key = 2;
+  oneof value{
+    string stringValue = 3;
+    int32 integerValue = 4;
+    double doubleValue = 5;
+    bool boolValue = 6;
+  };
+}
+enum OpType{
+  OP_EQ = 0;
+  OP_NEQ = 1;
+  OP_GT = 2;
+  OP_GTE = 3;
+  OP_LT = 4;
+  OP_LTE = 5;
+  OP_REGEX = 6;
+  OP_AND = 7;
+  OP_OR = 8;
+  OP_SAME_LEVEL = 9;
+}
+
+message Condition{
+  OpType opType = 1;
+  oneof condition {
+    Condition condition1 = 2;
+    Element element = 3;
+  }
+  optional Condition condition2 = 4;
+}
+
+
+
+message Document{
+  int32 count = 1;
+  string name = 2;
+  repeated Element element = 3;
+}
+
+message QueryResult{
+  int32 count = 1;
+  repeated Document document = 2;
+}
+
+message Query{
+  QueryType opType = 1;
+  string documentName = 2;
+  optional Condition condition = 3;
+  QueryResult result = 4 ;
+  int64 limit = 5;
+}
+//message QueryResponse {
+//  bool ok = 1;
+//}
+//service QueryService{
+//  rpc sendQuery(Query) returns (QueryResponse){}
+//}
